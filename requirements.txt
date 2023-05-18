@@ -1,4 +1,8 @@
-flask
+Jinja2==2.11.3
+MarkupSafe==2.0.1
+itsdangerous==1.1.0
+Werkzeug==2.1
+Flask==1.1.1
 gevent
 supervisor
 six==1.12.0

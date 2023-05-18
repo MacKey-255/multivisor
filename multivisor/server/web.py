@@ -23,8 +23,12 @@ from .util import is_login_valid, login_required
 
 
 log = logging.getLogger("multivisor")
+url_prefix = os.environ.get("MULTIVISOR_URL_PREFIX")
 
 app = Flask(__name__, static_folder="./dist/static", template_folder="./dist")
+if url_prefix is not None:
+  app.static_url_path = url_prefix + 'static'
+  app.config["APPLICATION_ROOT"] = url_prefix
 
 
 @app.route("/api/admin/reload")
