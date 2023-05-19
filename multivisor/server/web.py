@@ -4,6 +4,7 @@ import functools
 import gevent
 from blinker import signal
 from gevent.monkey import patch_all
+from werkzeug.routing import Rule
 
 patch_all(thread=False)
 
@@ -23,12 +24,12 @@ from .util import is_login_valid, login_required
 
 
 log = logging.getLogger("multivisor")
-url_prefix = os.environ.get("MULTIVISOR_URL_PREFIX")
+url_prefix = os.environ.get("MULTIVISOR_URL_PREFIX", None)
 
 app = Flask(__name__, static_folder="./dist/static", template_folder="./dist")
+            # static_url_path=f'{url_prefix}static/'if url_prefix is not None else 'static')
 if url_prefix is not None:
-  app.static_url_path = url_prefix + 'static'
-  app.config["APPLICATION_ROOT"] = url_prefix
+  app.url_rule_class = lambda path, **options: Rule(url_prefix + path, **options)
 
 
 @app.route("/api/admin/reload")

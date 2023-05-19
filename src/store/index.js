@@ -134,7 +134,7 @@ export default new Vuex.Store({
     },
     logout () {
       this.commit('logout')
-      fetch('/api/logout', {method: 'POST'})
+      fetch('api/logout', {method: 'POST'})
     }
   },
   getters: {

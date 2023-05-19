@@ -52,7 +52,7 @@ export default {
       const form = new FormData()
       form.append('username', this.username)
       form.append('password', this.password)
-      fetch('/api/login', {method: 'POST', body: form})
+      fetch('api/login', {method: 'POST', body: form})
         .then((response) => {
           if (response.status === 200) {
             this.$store.commit('setIsAuthenticated', true)

@@ -17,12 +17,12 @@ const router = new Router({
     {path: '/view/supervisor', name: 'SupervisorPage', component: SupervisorPage, ...loginRequired},
     {path: '/view/process', name: 'ProcessPage', component: ProcessPage, ...loginRequired}
   ],
-  mode: 'history'
+  mode: 'hash'
 })
 
 router.beforeEach(async function (to, from, next) {
   if (store.state.useAuthentication === undefined || store.state.isAuthenticated === undefined) {
-    const response = await fetch('/api/auth')
+    const response = await fetch('api/auth')
     if (response.status === 504) {
       return next()
     }
